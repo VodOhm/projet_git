@@ -7,6 +7,7 @@ import time
 
 p1 = 0
 p2 = 0
+round = 2
 name =""
 
 def Play(Move):
@@ -14,6 +15,7 @@ def Play(Move):
     global p2
     IA = randint(1,5)
     print("Value AI:"+str(IA)+'\n')
+    shake()
     if Move==1:
         P_rock()
         if IA == 2 or IA == 5:
@@ -41,6 +43,7 @@ def Play(Move):
         elif IA == 1:
             AI_rock()
             print('Even')
+            even()
             label_results.config(text='Even')
             label_results.pack()
     if Move==2:
@@ -70,6 +73,7 @@ def Play(Move):
         elif IA == 2:
             AI_paper()
             print('Even')
+            even()
             label_results.config(text='Even')
             label_results.pack()
     if Move==3:
@@ -98,6 +102,7 @@ def Play(Move):
             label_results.pack()
         elif IA == 3:
             print('Even')
+            even()
             AI_scissors()
             label_results.config(text='Even')
             label_results.pack()
@@ -127,6 +132,7 @@ def Play(Move):
             label_results.pack()
         elif IA == 4:
             print('Even')
+            even()
             AI_lizard()
             label_results.config(text='Even')
             label_results.pack()
@@ -157,62 +163,60 @@ def Play(Move):
         elif IA == 5:
             AI_spock()
             print('Even')
+            even()
             label_results.config(text='Even')
             label_results.pack()
-    if p1 == 2:
+    can.create_rectangle(235, 198, 220, 223, fill="white")
+    can.create_rectangle(262, 198, 276, 223, fill="white")
+    can.create_text(250, 200, text="Score:\n"+str(p1)+" - "+str(p2), fill="black", justify="center", font=("Terminal", 20))
+    if p1 == round:
         print('\nYou wins !\n')
         wingame()
         victory()
-    elif p2 == 2:
+    elif p2 == round:
         print('\nThe computer beats you, SKYNET is on his way!\n')
         losegame()
         defeat()
     else:
         print('\nNext round !\n')
 
-#def choice():  
-#    if Button.text=='Rock':
-#        Move=1
-#    elif Button['text']=='Paper':
-#        Move=2
-#    elif Button['text']=='Cisors':
-#        Move=3
-#    elif Button['text']=='Lizard':
-#        Move=4
-#    elif Button['text']=='Spock':
-#        Move=5
+#Acquisition boutons préssés.
+def b1_pressed():
+    Play(1)
+def b2_pressed():
+    Play(2)
+def b3_pressed():
+    Play(3)
+def b4_pressed():
+    Play(4)
+def b5_pressed():
+    Play(5)
 
+#Acquisition clavier
 def touche_pressed():
     def touche_x(event):
         touche = event.keysym
         print(touche)
-#        b1.config(relief=FLAT)
-#        time.sleep(1)
-        shake()
         Play(1)
 
     def touche_c(event):
         touche = event.keysym
         print(touche)
-        shake()
         Play(2)
 
     def touche_v(event):
         touche = event.keysym
         print(touche)
-        shake()
         Play(3)
 
     def touche_b(event):
         touche = event.keysym
         print(touche)
-        shake()
         Play(4)
 
     def touche_n(event):
         touche = event.keysym
         print(touche)
-        shake()
         Play(5)
 
     #Choppage de l'appui sur la touche x
@@ -254,6 +258,12 @@ def wingame():
     global photo2
     photo2 = PhotoImage(file="Win2.png")
     can.create_image(0,175, anchor = NW, image=photo2)
+    can.pack(side=TOP, padx=5, pady=5)
+
+def even():
+    global photo2
+    photo2 = PhotoImage(file="Base.png")
+    can.create_image(-30,150, anchor = NW, image=photo2)
     can.pack(side=TOP, padx=5, pady=5)
 
 #Move
@@ -357,9 +367,15 @@ def go():
     photo = PhotoImage(file="B1.png")
     photo2 = PhotoImage(file="Base.png")
     AI = PhotoImage(file="IA.png")
-    can.create_image(0,300, anchor = NW, image=photo2)
+    can.create_image(-30,150, anchor = NW, image=photo2)
     can.create_image(300,0, anchor = NW, image=AI)
     can.create_image(0,300, anchor = NW, image=photo)
+    can.create_text(250, 200, text="Score:\n"+str(p1)+" - "+str(p2), fill="black", justify="center", font=("Terminal", 20))
+    can.create_rectangle(235, 198, 220, 223, fill="white")
+    can.create_rectangle(262, 198, 276, 223, fill="white")
+    can.create_text(250, 160, text="In "+str(round)+" rounds ", fill="black", justify="center", font=("Terminal", 20))
+    can.create_text(50, 160, text=name, fill="blue", justify="center", font=("Terminal", 20))
+    can.create_text(400, 200, text="Sheldon Cooper", fill="red", justify="center", font=("Terminal", 20))
     can.pack(side=TOP, padx=5, pady=5)
 buton_go = Button(frame_rulesandplay, text="Play", command=go)
 buton_go.pack(side=LEFT, padx=8, pady=8)
@@ -369,11 +385,14 @@ can= Canvas(fenetre, width=500, height=400, bg='white')
 photo = PhotoImage(file="B1.png")
 photo2 = PhotoImage(file="Base.png")
 AI = PhotoImage(file="IA.png")
-can.create_image(0,300, anchor = NW, image=photo2)
+can.create_image(-30,150, anchor = NW, image=photo2)
 can.create_image(300,0, anchor = NW, image=AI)
 can.create_image(0,300, anchor = NW, image=photo)
+can.create_text(250, 200, text="Score:\n"+str(p1)+" - "+str(p2), fill="black", justify="center", font=("Terminal", 20))
+can.create_rectangle(235, 198, 220, 223, fill="white")
+can.create_rectangle(262, 198, 276, 223, fill="white")
+can.create_text(400, 200, text="Sheldon Cooper", fill="red", justify="center", font=("Terminal", 20))
 can.pack(side=TOP, padx=5, pady=5)
-
 
 Frame_buttons = Frame(fenetre, borderwidth=2, relief=GROOVE)
 Frame_buttons.pack()
@@ -383,11 +402,11 @@ Frame1.pack(side=LEFT, padx=5, pady=1)
 
 # Ajout de boutons + label, dans frame1
 Label(Frame1, bg = "yellow", text="Moves").pack(pady=1)
-b1=Button(Frame1, text ="Rock\n(press x)", command=touche_pressed)
-b2=Button(Frame1, text ='Paper\n(press c)', command=touche_pressed)
-b3=Button(Frame1, text ='Cisors\n(press v)', command=touche_pressed)
-b4=Button(Frame1, text ='Lizard\n(press b)', command=touche_pressed)
-b5=Button(Frame1, text ='Spock\n(press n)', command=touche_pressed)
+b1=Button(Frame1, text ="Rock\n(press x)", command=b1_pressed)
+b2=Button(Frame1, text ='Paper\n(press c)', command=b2_pressed)
+b3=Button(Frame1, text ='Cisors\n(press v)', command=b3_pressed)
+b4=Button(Frame1, text ='Lizard\n(press b)', command=b4_pressed)
+b5=Button(Frame1, text ='Spock\n(press n)', command=b5_pressed)
 b1.pack(side=LEFT, padx=8, pady=8)
 b2.pack(side=LEFT, padx=8, pady=8)
 b3.pack(side=LEFT, padx=8, pady=8)
@@ -398,12 +417,15 @@ b5.pack(side=LEFT, padx=8, pady=8, )
 Frame2 = Frame(Frame_buttons, relief=GROOVE)
 Frame2.pack(side=RIGHT, padx=5, pady=1)
 Label(Frame2, text="Fonctions").pack(pady=1)
+
 def replay():
+    reverseshake()
     go()
     global p1
     p1 = 0
     global p2 
     p2 = 0
+
 buton_replay=Button(Frame2, text="Replay", command=replay)
 buton_replay.pack(side=LEFT, padx=15, pady=8)
 buton_quit=Button(Frame2, text="Exit", command=quit)
@@ -431,40 +453,71 @@ def defeat():
         quit()
 
 #fenetre pour rentrer son nom
-def displayText():
+def displayName():
     global entryWidget
     global name
     name = entryWidget.get().strip()
+    can.create_text(50, 160, text=name, fill="blue", justify="center", font=("Terminal", 20))
     root.destroy()
+
+#window to choose the number of rounds
+def displayRound():
+    global entryWidget2
+    global round
+    value = ""
+    value = entryWidget2.get().strip()
+    round = int(float(value))
+#    root2.destroy()
+    can.create_text(250, 160, text="In "+str(round)+" rounds ", fill="black", justify="center", font=("Terminal", 20))
     fenetre.attributes("-topmost", True)
-    
+
 if __name__ == "__main__":
-
     root = Tk()
-
     root.title("Who are you ?")
     root["padx"] = 40
     root["pady"] = 20   
     root.attributes("-topmost", True)
 
+    root2 = Tk()
+    root2.title("How many rounds ?")
+    root2["padx"] = 40
+    root2["pady"] = 20   
+    root2.attributes("-topmost", True)
+
     # Create a text frame to hold the text Label and the Entry widget
     textFrame = Frame(root)
+    roundFrame = Frame(root2)
 
-    #Create a Label in textFrame
+    #Create a Label for the name in textFrame
     entryLabel = Label(textFrame)
     entryLabel["text"] = "Please state your name"
     entryLabel.pack(side=LEFT)
+
+    #Create a Label for the rounds in textFrame
+    entryLabel2 = Label(roundFrame)
+    entryLabel2["text"] = "How long ?"
+    entryLabel2.pack(side=LEFT)
 
     # Create an Entry Widget in textFrame
     entryWidget = Entry(textFrame)
     entryWidget["width"] = 20
     entryWidget.pack(side=LEFT)
 
-    textFrame.pack()
+    # Create an Entry Widget in roundFrame
+    entryWidget2 = Entry(roundFrame)
+    entryWidget2["width"] = 20
+    entryWidget2.pack(side=LEFT)
 
-    button_submit = Button(root, text="Submit", command=displayText)
-    button_submit.pack()
+    textFrame.pack()
+    roundFrame.pack()
+
+    button_submit_name = Button(root, text="Submit name", command=displayName)
+    button_submit_name.pack()
+
+    button_submit_round = Button(root2, text="Submit rounds", command=displayRound)
+    button_submit_round.pack()
 
 fenetre.mainloop()
-while p1 <= 2 or p2 <= 2:
+
+while p1 <= round or p2 <= round:
     touche_pressed()
