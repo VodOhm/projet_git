@@ -180,7 +180,7 @@ def Play(Move):
     else:
         print('\nNext round !\n')
 
-#Acquisition boutons préssés.
+#Acquisition boutons préssées.
 def b1_pressed():
     Play(1)
 def b2_pressed():
@@ -191,49 +191,6 @@ def b4_pressed():
     Play(4)
 def b5_pressed():
     Play(5)
-
-#Acquisition clavier
-def touche_pressed():
-    def touche_x(event):
-        touche = event.keysym
-        print(touche)
-        Play(1)
-
-    def touche_c(event):
-        touche = event.keysym
-        print(touche)
-        Play(2)
-
-    def touche_v(event):
-        touche = event.keysym
-        print(touche)
-        Play(3)
-
-    def touche_b(event):
-        touche = event.keysym
-        print(touche)
-        Play(4)
-
-    def touche_n(event):
-        touche = event.keysym
-        print(touche)
-        Play(5)
-
-    #Choppage de l'appui sur la touche x
-    can.focus_set()
-    can.bind("<KeyPress-x>", touche_x)
-    #Choppage de l'appui sur la touche c
-    can.focus_set()
-    can.bind("<KeyPress-c>", touche_c)
-    #Choppage de l'appui sur la touche v
-    can.focus_set()
-    can.bind("<KeyPress-v>", touche_v)
-    #Choppage de l'appui sur la touche b
-    can.focus_set()
-    can.bind("<KeyPress-b>", touche_b)
-    #Choppage de l'appui sur la touche n
-    can.focus_set()
-    can.bind("<KeyPress-n>", touche_n)
 
  #Heads
 def loseround():
@@ -402,11 +359,11 @@ Frame1.pack(side=LEFT, padx=5, pady=1)
 
 # Ajout de boutons + label, dans frame1
 Label(Frame1, bg = "yellow", text="Moves").pack(pady=1)
-b1=Button(Frame1, text ="Rock\n(press x)", command=b1_pressed)
-b2=Button(Frame1, text ='Paper\n(press c)', command=b2_pressed)
-b3=Button(Frame1, text ='Cisors\n(press v)', command=b3_pressed)
-b4=Button(Frame1, text ='Lizard\n(press b)', command=b4_pressed)
-b5=Button(Frame1, text ='Spock\n(press n)', command=b5_pressed)
+b1=Button(Frame1, text ="Rock", command=b1_pressed)
+b2=Button(Frame1, text ='Paper', command=b2_pressed)
+b3=Button(Frame1, text ='Cisors', command=b3_pressed)
+b4=Button(Frame1, text ='Lizard', command=b4_pressed)
+b5=Button(Frame1, text ='Spock', command=b5_pressed)
 b1.pack(side=LEFT, padx=8, pady=8)
 b2.pack(side=LEFT, padx=8, pady=8)
 b3.pack(side=LEFT, padx=8, pady=8)
